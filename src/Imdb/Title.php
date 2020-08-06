@@ -916,7 +916,7 @@ class Title extends MdbBase
         if (!$this->isEpisode()) {
             return array();
         }
-        $seriesRegex = '!<div class="titleParent">\s*<a\s+href="/title/tt(?<seriesimdbid>\d{7,8})[^"]+"\s*title="(?<seriestitle>[^"]+)"!ims';
+        $seriesRegex = '!<div class="titleParent">\s*<a\s+href="/title/tt(?<seriesimdbid>\d{8}|\d{7})[^"]+"\s*title="(?<seriestitle>[^"]+)"!ims';
 
         if (preg_match($seriesRegex, $this->getPage("Title"), $match)) {
             return array(
@@ -1898,7 +1898,7 @@ class Title extends MdbBase
                     } // no such page
                     $preg = '!<div class="info" itemprop="episodes".+?>\s*<meta itemprop="episodeNumber" content="(?<episodeNumber>-?\d+)"/>\s*'
                       . '<div class="airdate">\s*(?<airdate>.*?)\s*</div>\s*'
-                      . '.+?\shref="/title/tt(?<imdbid>\d{7,8})/[^"]+?"\s+title="(?<title>[^"]+?)"\s+itemprop="name"'
+                      . '.+?\shref="/title/tt(?<imdbid>\d{8}|\d{7})/[^"]+?"\s+title="(?<title>[^"]+?)"\s+itemprop="name"'
                       . '.+?<div class="item_description" itemprop="description">(?<plot>.*?)</div>!ims';
                     preg_match_all($preg, $page, $eps, PREG_SET_ORDER);
                     foreach ($eps as $ep) {
